@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>AJAX / Fetch實作</title>
+    </head>
+    <body>
+        <h1>AJAX 實作</h1>
+        <button onclick="getData();">取得資料</button>
+        <div id="result"></div>
+        
+    </body>
+    <script>
+    //測試用的連線網址(目標網址,要取得的資料):
+    //https://cwpeng.github.io/live-records-samples/data/products.json 
+       
+        function getData(){
+            // 利用fetch進行連線取得資料
+            fetch("https://cwpeng.github.io/live-records-samples/data/products.json").then(function(response){
+                return response.json();
+                }).then(function(data){ 
+                    // 將取得的資料呈現到畫面上
+                    let result = document.querySelector("#result");
+                    // result.innerHTML = "";//每次按下都先把畫面清空
+                    for(let i = 0; i<data.length;i++){
+                        let product=data[i];
+                        console.log(product.name);
+                        result.innerHTML += "<div>"+product.name+","+product.price+","+product.description+"</div>";
+                    }
+                });
+        };
+    </script>
+</html>
